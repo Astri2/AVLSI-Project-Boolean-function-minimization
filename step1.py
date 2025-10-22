@@ -33,6 +33,7 @@ def checkMintermDifference(minterm1: str, minterm2: str) -> bool:
 def getprimeImplicants(minterms: list[str]) -> list[str]:
     """Computes the prime implicants from a list of minterms.
     Each minterm is of the form "1001, "1010", etc and can be represented with a string
+    
     # TODO: does not take "Groups" into account
 
     Args:

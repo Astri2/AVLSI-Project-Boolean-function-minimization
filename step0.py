@@ -42,7 +42,7 @@ def __fillTruthTable():
             print("Error: Value must be '1', '0' or '-'", file=stderr)
             return None
         
-    return nbVariables, values
+    return nbVariables, values, variableNames
 
 def __extractMinterms(nbVariables: int, values: list[str] ):
     max_m_len = len(str(len(values)-1))
@@ -57,9 +57,11 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
         minterms.append(__toBin(num, nbVariables))
         print(minterms[-1])
 
+    """
     print('[\"', end="")
     print(*minterms, sep="\", \"", end="")
     print('\"]', end="")
+    """
 
     return minterms
 
@@ -67,6 +69,6 @@ def getMinterms():
     res = __fillTruthTable()
     if(res == None): return None
     
-    nbVariables, values = res
+    nbVariables, values, variableNames = res
     minterms = __extractMinterms(nbVariables, values)
-    return minterms
+    return minterms, variableNames
