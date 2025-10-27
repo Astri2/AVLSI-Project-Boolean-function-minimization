@@ -16,6 +16,11 @@ def CreatePrimeImplicantChart(primeImplicants, minterms):
     return primeImplicantChart
    
 def getEssentialPrimeImplicants(primeImplicantChart, minterms):
+
+    # If an implicant covers everything, we found a tautology => return it and stop
+    for implicant, cov in primeImplicantChart.items():
+        if "0" not in cov: return implicant
+
     essentialPrimeImplicants = []
     mintermCoverages = list(primeImplicantChart.values())
     keys = list(primeImplicantChart.keys())

@@ -57,10 +57,14 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
         minterms.append(__toBin(num, nbVariables))
         print(minterms[-1])
 
+    # Disabled this check to let the algorithm handle it.
     """
-    print('[\"', end="")
-    print(*minterms, sep="\", \"", end="")
-    print('\"]', end="")
+    if(len(minterms) == 0):
+        print("Antilogy Detected. No solution possible. Stopping here")
+        exit(0)
+    elif(len(minterms) == len(values)):
+        print("Tautology Detected. Any solution is correct. Stopping here")
+        exit(0)
     """
 
     return minterms
