@@ -48,14 +48,22 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
     max_m_len = len(str(len(values)-1))
 
     minterms: list[str] = []
+    dontcare: list[str] = []
     print("Minterms:")
     for num, val in enumerate(values):
         if(val == "0"): continue
 
-        if(val == "1"): print(f" m{num:<{max_m_len}} : ", end="")
-        elif(val == "-"): print(f"(m{num:<{max_m_len}}): ", end="")
-        minterms.append(__toBin(num, nbVariables))
-        print(minterms[-1])
+        m = __toBin(num, nbVariables)
+        
+        if(val == "1"): 
+            print(f" m{num:<{max_m_len}} : ", end="")
+            minterms.append(m)
+        elif(val == "-"): 
+            print(f"(m{num:<{max_m_len}}): ", end="")
+            dontcare.append(m)
+
+        print(m)
+        
 
     # Disabled this check to let the algorithm handle it.
     """
@@ -67,12 +75,12 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
         exit(0)
     """
 
-    return minterms
+    return minterms, dontcare
 
 def getMinterms():
     res = __fillTruthTable()
     if(res == None): return None
     
     nbVariables, values, variableNames = res
-    minterms = __extractMinterms(nbVariables, values)
-    return minterms, variableNames
+    minterms, dontcare = __extractMinterms(nbVariables, values)
+    return minterms, dontcare, variableNames

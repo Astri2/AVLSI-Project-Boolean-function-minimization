@@ -1,17 +1,25 @@
-# Convert Prime implicant into boolean expression
+def getUncoveredMinterms(essential, chart, minterms):
+    covered = [False] * len(minterms)
 
-def essentialPrimesToBoolExpr(essentialPrimes, variableNames):
+    for imp in essential:
+        row = chart[imp]
+        for i, v in enumerate(row):
+            if v == "1":
+                covered[i] = True
 
-    if(len(essentialPrimes) == 0): return "Antilogy: no boolean expression is valid"
+    return [i for i, c in enumerate(covered) if not c]
 
-    cubes = []
-    for prime in essentialPrimes:
-        if all(c == "-" for c in prime): return "Tautology: any boolean expression is valid"
+def selectAdditionalImplicants(chart, uncovered, essentials):
+    selected = []
+    for imp, row in chart.items():
+        if imp in essentials:
+            continue
+        count = sum(1 for i in uncovered if row[i] == "1")
+        if count > 0:
+            selected.append((count, imp))
 
-        cube = ""
-        for i, c in enumerate(prime):
-            if(c == '-'): continue
-            elif(c == '1'): cube += variableNames[i]
-            else: cube += variableNames[i] + "'"
-        cubes.append(cube)
-    return " + ".join(cubes)
+    if not selected:
+        return []
+
+    selected.sort(reverse=True)
+    return [selected[0][1]]

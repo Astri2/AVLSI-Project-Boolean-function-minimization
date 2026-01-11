@@ -1,13 +1,14 @@
 from step0 import getMinterms
 from step1 import getprimeImplicants
-from step2 import *
-from step3 import essentialPrimesToBoolExpr
+from step2 import CreatePrimeImplicantChart, getEssentialPrimeImplicants
+from step3 import getUncoveredMinterms, selectAdditionalImplicants
+from step4 import essentialPrimesToBoolExpr
 
 res0 = getMinterms()
 if(res0 == None): exit(1)
-minterms, variableNames = res0
+minterms, dontcare, variableNames = res0
 
-primeImplicants = getprimeImplicants(minterms)
+primeImplicants = getprimeImplicants(minterms + dontcare)
 print("\nPrime Implicants:", primeImplicants)
 
 primeImplicantChart = CreatePrimeImplicantChart(primeImplicants, minterms)
@@ -16,5 +17,10 @@ print("\nPrime Implicant Chart:", primeImplicantChart)
 essentialPrimeImplicants = getEssentialPrimeImplicants(primeImplicantChart, minterms)
 print("\nEssential Prime Implicant:", essentialPrimeImplicants)
 
-finalExpression = essentialPrimesToBoolExpr(essentialPrimeImplicants, variableNames)
+uncovered = getUncoveredMinterms(essentialPrimeImplicants, primeImplicantChart, minterms)
+additional = selectAdditionalImplicants(primeImplicantChart, uncovered, essentialPrimeImplicants)
+FinalCover = essentialPrimeImplicants+additional
+print("\nFinal Implicant cover:", FinalCover)
+
+finalExpression = essentialPrimesToBoolExpr(FinalCover, variableNames)
 print("\nFinal boolean expression:", finalExpression)

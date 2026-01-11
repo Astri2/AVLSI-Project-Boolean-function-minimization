@@ -1,7 +1,6 @@
 import re
 
 def CreatePrimeImplicantChart(primeImplicants, minterms):
-    #primeImplicantChart = {primeImplicant: '' for primeImplicant in primeImplicants}
     primeImplicantChart = {}
     for i in range(len(primeImplicants)):
         primeImplicant = primeImplicants[i]
@@ -17,10 +16,7 @@ def CreatePrimeImplicantChart(primeImplicants, minterms):
    
 def getEssentialPrimeImplicants(primeImplicantChart, minterms):
 
-    for implicant, cov in primeImplicantChart.items():
-        if "0" not in cov: return [implicant]
-
-    essentialPrimeImplicants = []
+    essentialPrimeImplicants = set()
     mintermCoverages = list(primeImplicantChart.values())
     keys = list(primeImplicantChart.keys())
     num_minterms = len(minterms)
@@ -38,6 +34,6 @@ def getEssentialPrimeImplicants(primeImplicantChart, minterms):
                     idx_one = j
             
         if count_one == 1:
-            essentialPrimeImplicants.append(keys[idx_one])
+            essentialPrimeImplicants.add(keys[idx_one])
     
-    return essentialPrimeImplicants
+    return list(essentialPrimeImplicants)
