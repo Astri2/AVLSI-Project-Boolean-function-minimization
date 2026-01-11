@@ -18,7 +18,7 @@ def CreatePrimeImplicantChart(primeImplicants, minterms):
 def getEssentialPrimeImplicants(primeImplicantChart, minterms):
 
     for implicant, cov in primeImplicantChart.items():
-        if "0" not in cov: return implicant
+        if "0" not in cov: return [implicant]
 
     essentialPrimeImplicants = []
     mintermCoverages = list(primeImplicantChart.values())

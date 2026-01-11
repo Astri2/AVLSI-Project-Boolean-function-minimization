@@ -8,6 +8,7 @@ if(res0 == None): exit(1)
 minterms, variableNames = res0
 
 primeImplicants = getprimeImplicants(minterms)
+print("\nPrime Implicants:", primeImplicants)
 
 primeImplicantChart = CreatePrimeImplicantChart(primeImplicants, minterms)
 print("\nPrime Implicant Chart:", primeImplicantChart)

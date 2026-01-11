@@ -1,6 +1,5 @@
 # implementation of the McCluskey Algorithm
 # Step 1
-# https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm
 
 def mergeMinterms(minterm1: str, minterm2: str) -> str:
     mergedMinterm = ""
