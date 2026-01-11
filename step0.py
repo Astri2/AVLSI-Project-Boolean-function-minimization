@@ -38,7 +38,7 @@ def __fillTruthTable():
         print(f"m{i:<{max_m_len}} | ", end="")
         print(*__toBin(i, nbVariables), sep=ValSep, end=" | ")
         values[i] = input()
-        if(values[i] not in "10-"):
+        if(not values[i] or values[i] not in "10-"):
             print("Error: Value must be '1', '0' or '-'", file=stderr)
             return None
         
