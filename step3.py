@@ -9,7 +9,7 @@ def getUncoveredMinterms(essential, chart, minterms):
 
     return [i for i, c in enumerate(covered) if not c]
 
-def selectAdditionalImplicants(chart, uncovered, essentials):
+def selectAdditionalImplicant(chart, uncovered, essentials):
     selected = []
     for imp, row in chart.items():
         if imp in essentials:
@@ -23,3 +23,17 @@ def selectAdditionalImplicants(chart, uncovered, essentials):
 
     selected.sort(reverse=True)
     return [selected[0][1]]
+
+def completeCover(essentialPrimeImplicants, primeImplicantChart, minterms):
+    
+    finalCover = essentialPrimeImplicants
+    while True:
+        uncovered = getUncoveredMinterms(finalCover, primeImplicantChart, minterms)
+        if(len(uncovered) == 0): return finalCover
+        
+        additional = selectAdditionalImplicant(primeImplicantChart, uncovered, finalCover)
+        if(len(additional) == 0):
+            print("No additional implicant found")
+            return finalCover
+        
+        finalCover += additional
