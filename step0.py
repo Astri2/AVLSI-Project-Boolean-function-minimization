@@ -8,6 +8,7 @@ def __toBin(n: int, size: int) -> str:
     return b
 
 def __generateVariableNames(nbVariables: int) -> list[str]:
+    # iterate trough all letters. Add numbers if needed
     if(nbVariables <= 26):
         return [chr(97+i) for i in range(nbVariables)]
     else:
@@ -63,7 +64,9 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
             dontcare.append(m)
 
         print(m)
-            
+
+    # At this point we could already stop the algorithm for specific cases
+    # However we want to check that the algorithm can withstand those cases so we commented the checks
     """
     if(len(minterms) == 0):
         if(len(dontcare) == 0):

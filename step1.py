@@ -10,13 +10,10 @@ def mergeMinterms(minterm1: str, minterm2: str) -> str:
         else: mergedMinterm += minterm1[i]
     return mergedMinterm
 
-    # TODO better inline
-    # mergedMinterm = "".join([(c1 if c1 == c2 else '-') for c1, c2 in zip(minterm1, minterm2)])
 
 def checkDashesAlign(minterm1: str, minterm2: str)-> bool:
     for i in range(len(minterm1)):
-        # If one minterm has dashes and the other does not then the minterms cannot be merged. 
-        # TODO: does this make sense ?
+        # Dashes must align to be able to merge
         if minterm1[i] != '-' and minterm2[i] == '-': 
             return False
     return True
@@ -33,7 +30,7 @@ def getprimeImplicants(minterms: list[str]) -> list[str]:
     """Computes the prime implicants from a list of minterms.
     Each minterm is of the form "1001, "1010", etc and can be represented with a string
     
-    # TODO: does not take "Groups" into account
+    # TODO: does not take "Groups" into account to optimize the merge checks
 
     Args:
         minterms (list[str]): list of minterms to merge recursively to get prime Implicants
@@ -56,7 +53,7 @@ def getprimeImplicants(minterms: list[str]) -> list[str]:
             # Checking that two minterms can be merged
             if(checkDashesAlign(minterm1, minterm2)) and checkMintermDifference(minterm1, minterm2):
                 mergedMinterm: str = mergeMinterms(minterm1, minterm2)
-                # TODO set instead of list ?
+                
                 if(mergedMinterm not in primeImplicants):
                     primeImplicants.append(mergedMinterm)
                 numberOfMerges += 1
