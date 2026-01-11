@@ -1,12 +1,12 @@
 # Convert Prime implicant into boolean expression
 
-def essentialPrimesToBoolExpr(essentialPrimes, variableNames):
+def primesToBoolExpr(primes, variableNames):
 
-    if(len(essentialPrimes) == 0): return "Antilogy: no boolean expression is valid"
+    if(len(primes) == 0): return "0 (no minterm)"
 
     cubes = []
-    for prime in essentialPrimes:
-        if all(c == "-" for c in prime): return "Tautology: any boolean expression is valid"
+    for prime in primes:
+        if all(c == "-" for c in prime): return "1 (tautology)"
 
         cube = ""
         for i, c in enumerate(prime):

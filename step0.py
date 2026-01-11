@@ -63,18 +63,19 @@ def __extractMinterms(nbVariables: int, values: list[str] ):
             dontcare.append(m)
 
         print(m)
-        
-
-    # Disabled this check to let the algorithm handle it.
+            
     """
     if(len(minterms) == 0):
-        print("Antilogy Detected. No solution possible. Stopping here")
+        if(len(dontcare) == 0):
+            print("Antilogy Detected. The solution is f=0. Stopping here")
+        else:
+            print("Only don't care minterm detected. Choosing f=0. Stopping here")
         exit(0)
     elif(len(minterms) == len(values)):
-        print("Tautology Detected. Any solution is correct. Stopping here")
+        print("Tautology Detected. The solution is f=1. Stopping here")
         exit(0)
     """
-
+    
     return minterms, dontcare
 
 def getMinterms():

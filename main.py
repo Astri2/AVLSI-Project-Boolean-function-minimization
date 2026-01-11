@@ -2,7 +2,7 @@ from step0 import getMinterms
 from step1 import getprimeImplicants
 from step2 import CreatePrimeImplicantChart, getEssentialPrimeImplicants
 from step3 import completeCover
-from step4 import essentialPrimesToBoolExpr
+from step4 import primesToBoolExpr
 
 res0 = getMinterms()
 if(res0 == None): exit(1)
@@ -20,5 +20,5 @@ print("\nEssential Prime Implicant:", essentialPrimeImplicants)
 FinalCover = completeCover(essentialPrimeImplicants, primeImplicantChart, minterms)
 print("\nFinal Implicant cover:", FinalCover)
 
-finalExpression = essentialPrimesToBoolExpr(FinalCover, variableNames)
-print("\nFinal boolean expression:", finalExpression)
+finalExpression = primesToBoolExpr(FinalCover, variableNames)
+print("\nFinal boolean expression: f =", finalExpression)
